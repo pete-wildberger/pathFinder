@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ES5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "removeComments": false,
+    "noImplicitAny": true,
+    "skipLibCheck": true,
+    "allowJs": true,
+    "jsx": "react",
+    "outDir": "./dist",
+    "lib": ["es5", "es2015", "dom", "scripthost"],
+    "typeRoots": ["node_modules/@types"]
+  },
+  "compileOnSave": true,
+  "exclude": [],
+  "include": ["./src/server/app.ts"]
+}
