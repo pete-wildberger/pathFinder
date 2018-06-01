@@ -1,0 +1,9 @@
+.square {
+  height: 80px;
+  width: 80px;
+  border: black 1px solid;
+  display: inline-block;
+  .blocked {
+    background-color: black;
+  }
+}

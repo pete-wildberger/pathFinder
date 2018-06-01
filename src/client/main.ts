@@ -1,13 +1,13 @@
 console.log('TS IS SOURCED');
-import * as $ from 'jquery';
 import { App } from './classes/App.class';
 
-$(onReady)
-function onReady(){
-  main()
+function main() {
+  let $board: any = document.getElementById('board');
+  console.log($board);
+  const app = new App(10, 10, $board);
+  app.run();
 }
 
-function main() {
-  const app = new App(10, 10);
-  app.run();
+window.onload = () => {
+  main();
 };
