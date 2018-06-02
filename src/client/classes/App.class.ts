@@ -7,7 +7,7 @@ export class App {
   public location: HTMLElement;
   public wanderer: Wanderer;
   constructor(x: number, y: number, location: HTMLElement) {
-    (this.width = x), (this.height = y), (this.location = location), (this.wanderer = new Wanderer());
+    (this.width = x), (this.height = y), (this.location = location), (this.wanderer = new Wanderer(x, y));
   }
   blockIt = (e: Event) => {
     let pos: string[] = e.srcElement.id.split('_');
@@ -32,7 +32,7 @@ export class App {
     this.render_board();
   };
   render_board = (): void => {
-    let output: any[] = [];
+    let output: string[] = [];
     const addClass = (square: Square): string => {
       let classes: string = '';
       if (square.occupied) {
