@@ -13,7 +13,7 @@ export class Wanderer {
     };
     this.wander_icon = '<img class="wanderer" src="assets/icons/baseline-directions_walk-24px.svg"/>';
   }
-  checkLimits = (move): boolean => {
+  checkLimits = (move: any): boolean => {
     if (this.position.x >= move.x && move.x <= this.limits.x && this.position.x >= move.x && move.y <= this.limits.y) {
       return true;
     }

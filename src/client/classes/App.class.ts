@@ -1,13 +1,19 @@
 import { Square } from './Square.class';
 import { Wanderer } from './Wanderer.class';
+import { Goal } from './Goal.class';
 export class App {
   public width: number;
   public height: number;
   public board: any[];
   public location: HTMLElement;
   public wanderer: Wanderer;
+  public goal: Goal;
   constructor(x: number, y: number, location: HTMLElement) {
-    (this.width = x), (this.height = y), (this.location = location), (this.wanderer = new Wanderer(x, y));
+    (this.width = x),
+      (this.height = y),
+      (this.location = location),
+      (this.wanderer = new Wanderer(x, y)),
+      (this.goal = new Goal(x, y));
   }
   blockIt = (e: Event) => {
     let pos: string[] = e.srcElement.id.split('_');
@@ -59,6 +65,9 @@ export class App {
     let wander_pos = this.wanderer.getPosition();
     let $wanderer = document.getElementById(`${wander_pos.x}_${wander_pos.y}`);
     $wanderer.innerHTML = this.wanderer.wander_icon;
+    let goal_pos = this.goal.getPosition();
+    let $goal = document.getElementById(`${goal_pos.x}_${goal_pos.y}`);
+    $goal.innerHTML = this.goal.goal_icon;
     Array.from(document.getElementsByClassName('square')).forEach(block => {
       block.addEventListener('click', this.blockIt, false);
     });
