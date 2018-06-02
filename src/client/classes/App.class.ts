@@ -36,6 +36,7 @@ export class App {
   run = (): void => {
     this.board = this.makeBoard(this.width, this.height);
     this.render_board();
+    this.wanderer.move(this.board);
   };
   render_board = (): void => {
     let output: string[] = [];
