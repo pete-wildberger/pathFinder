@@ -1,0 +1,66 @@
+// Border box declaration
+
+html {
+  box-sizing: border-box;
+}
+/* inherit border-box on all elements in the universe and before and after
+ */
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+.head {
+  background: none;
+}
+
+/* grid system -- mobile first! */
+.row {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  background-size: cover;
+  width: 100%;
+}
+[class*='col-'] {
+  flex: 0 0 98%; /* phone */
+  // margin: 1% 1%;
+  background-color: transparent;
+}
+
+/* Mobile Landscape Screen Sizes */
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+  .col-3,
+  .col-3-6,
+  .col-6 {
+    flex: 0 0 44%;
+  }
+
+  .col-9,
+  .col-3-9,
+  .col-6-3,
+  .col-12 {
+    flex: 0 0 92%;
+  }
+}
+/* Desktop screen Sizes */
+@media only screen and (min-width: 768px) {
+  .col-3,
+  .col-3-6,
+  .col-3-9 {
+    flex: 0 0 20%;
+  }
+  .col-6,
+  .col-6-3 {
+    flex: 0 0 44%;
+  }
+  .col-9 {
+    flex: 0 0 68%;
+  }
+  .col-12 {
+    flex: 0 0 98%;
+  }
+  .col-10x10 {
+    flex: 0 0 10%;
+  }
+}

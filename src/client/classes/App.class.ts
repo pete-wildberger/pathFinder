@@ -1,11 +1,13 @@
 import { Square } from './Square.class';
+import { Wanderer } from './Wanderer.class';
 export class App {
   public width: number;
   public height: number;
   public board: any[];
   public location: HTMLElement;
+  public wanderer: Wanderer;
   constructor(x: number, y: number, location: HTMLElement) {
-    (this.width = x), (this.height = y), (this.location = location);
+    (this.width = x), (this.height = y), (this.location = location), (this.wanderer = new Wanderer());
   }
   blockIt = (e: Event) => {
     let pos: string[] = e.srcElement.id.split('_');
@@ -30,7 +32,7 @@ export class App {
     this.render_board();
   };
   render_board = (): void => {
-    let squares: any[] = [];
+    let output: any[] = [];
     const addClass = (square: Square): string => {
       let classes: string = '';
       if (square.occupied) {
@@ -45,13 +47,18 @@ export class App {
       return classes;
     };
     this.board.forEach((row: any[]) => {
+      output.push('<div class="row">');
       row.forEach((col: Square) => {
-        let square: string = `<div class="square${addClass(col)}" id="${col.x}_${col.y}">`;
+        let square: string = `<div class="col-10x10 square ${addClass(col)}" id="${col.x}_${col.y}">`;
         square += '</div>';
-        squares.push(square);
+        output.push(square);
       });
+      output.push('</div>');
     });
-    this.location.innerHTML = squares.join(' ');
+    this.location.innerHTML = output.join(' ');
+    let wander_pos = this.wanderer.getPosition();
+    let $wanderer = document.getElementById(`${wander_pos.x}_${wander_pos.y}`);
+    $wanderer.innerHTML = this.wanderer.wander_icon;
     Array.from(document.getElementsByClassName('square')).forEach(block => {
       block.addEventListener('click', this.blockIt, false);
     });

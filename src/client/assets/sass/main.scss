@@ -1,9 +1,16 @@
+@import 'grid';
+
 .square {
   height: 80px;
   width: 80px;
   border: black 1px solid;
   display: inline-block;
+  text-align: center;
 }
 .blocked {
   background-color: black;
+}
+.wanderer {
+  position: relative;
+  top: calc(50% - 10px); /* 50% - 3/4 of icon height */
 }

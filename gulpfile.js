@@ -9,6 +9,9 @@ const del = require('del');
 const paths = {
   pages: ['src/client/*.html']
 };
+const icons = {
+  pages: ['src/client/assets/icon/*.svg']
+};
 
 gulp.task('clean', done => {
   del.sync(['dist/*']);
@@ -21,7 +24,9 @@ gulp.task('sass', () => {
     .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
     .pipe(gulp.dest('dist/assets/css'));
 });
-
+gulp.task('copy-assets', () => {
+  return gulp.src(icons.pages).pipe(gulp.dest('dist/assets/icons'));
+});
 gulp.task('copy-html', () => {
   return gulp.src(paths.pages).pipe(gulp.dest('dist'));
 });
@@ -33,7 +38,7 @@ gulp.task('server', () => {
     .js.pipe(gulp.dest('dist'));
 });
 
-gulp.task('default', ['clean', 'copy-html', 'sass', 'server'], () => {
+gulp.task('default', ['clean', 'copy-html', 'copy-assets', 'sass', 'server'], () => {
   return browserify({
     basedir: '.',
     debug: true,
