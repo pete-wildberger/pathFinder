@@ -7,12 +7,20 @@ export class App {
   constructor(x: number, y: number, location: HTMLElement) {
     (this.width = x), (this.height = y), (this.location = location);
   }
+  blockIt = (e: Event) => {
+    let pos: string[] = e.srcElement.id.split('_');
+    let clicked: Square = this.board[+pos[1]][+pos[0]];
+    clicked.blocked = !clicked.blocked;
+    e.srcElement.classList.add('blocked');
+    this.render_board();
+  };
+
   makeBoard(width: number, height: number) {
     let board: any[] = [];
-    for (let i = 0; i < height; i++) {
+    for (let y = 0; y < height; y++) {
       board.push([]);
-      for (let j = 0; j < width; j++) {
-        board[i].push(new Square());
+      for (let x = 0; x < width; x++) {
+        board[y].push(new Square(x, y));
       }
     }
     return board;
@@ -20,13 +28,11 @@ export class App {
   run = (): void => {
     this.board = this.makeBoard(this.width, this.height);
     this.render_board();
-    console.log(this.board);
   };
   render_board = (): void => {
     let squares: any[] = [];
     const addClass = (square: Square): string => {
       let classes: string = '';
-      console.log(square);
       if (square.occupied) {
         classes += ' occupied';
       }
@@ -36,16 +42,18 @@ export class App {
       if (square.blocked) {
         classes += ' blocked';
       }
-      console.log(classes);
       return classes;
     };
     this.board.forEach((row: any[]) => {
       row.forEach((col: Square) => {
-        let square: string = `<div class="square${addClass(col)}">`;
+        let square: string = `<div class="square${addClass(col)}" id="${col.x}_${col.y}">`;
         square += '</div>';
         squares.push(square);
       });
     });
     this.location.innerHTML = squares.join(' ');
+    Array.from(document.getElementsByClassName('square')).forEach(block => {
+      block.addEventListener('click', this.blockIt, false);
+    });
   };
 }
