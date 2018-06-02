@@ -33,10 +33,13 @@ export class App {
     }
     return board;
   }
-  run = (): void => {
+  init = (): void => {
     this.board = this.makeBoard(this.width, this.height);
     this.render_board();
+  };
+  run = (): void => {
     this.wanderer.move(this.board);
+    this.render_board();
   };
   render_board = (): void => {
     let output: string[] = [];
