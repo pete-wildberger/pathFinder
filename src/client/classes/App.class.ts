@@ -43,25 +43,10 @@ export class App {
   };
   render_board = (): void => {
     let output: string[] = [];
-    const addClass = (square: Square): string => {
-      let classes: string = '';
-      if (square.occupied) {
-        classes += ' occupied';
-      }
-      if (square.dirty) {
-        classes += ' dirty';
-      }
-      if (square.blocked) {
-        classes += ' blocked';
-      }
-      return classes;
-    };
     this.board.forEach((row: any[]) => {
       output.push('<div class="row">');
       row.forEach((col: Square) => {
-        let square: string = `<div class="col-10x10 square ${addClass(col)}" id="${col.x}_${col.y}">`;
-        square += '</div>';
-        output.push(square);
+        output.push(col.getSquare());
       });
       output.push('</div>');
     });

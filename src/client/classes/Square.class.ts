@@ -8,4 +8,20 @@ export class Square {
     this.x = x;
     this.y = y;
   }
+  addClass = (): string => {
+    let classes: string = '';
+    if (this.occupied) {
+      classes += ' occupied';
+    }
+    if (this.dirty) {
+      classes += ' dirty';
+    }
+    if (this.blocked) {
+      classes += ' blocked';
+    }
+    return classes;
+  };
+  getSquare = () => {
+    return `<div class="col-10x10 square ${this.addClass()}" id="${this.x}_${this.y}"></div>`;
+  };
 }
