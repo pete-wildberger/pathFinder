@@ -1,6 +1,12 @@
 import { Square } from './Square.class';
 import { Wanderer } from './Wanderer.class';
 import { Goal } from './Goal.class';
+
+export interface coordinate {
+  x: number;
+  y: number;
+}
+
 export class App {
   public width: number;
   public height: number;
@@ -38,7 +44,7 @@ export class App {
     this.render_board();
   };
   run = (): void => {
-    this.wanderer.move(this.board);
+    this.wanderer.move(this.board, this.goal.position);
     this.render_board();
   };
   render_board = (): void => {

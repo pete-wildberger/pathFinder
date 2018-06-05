@@ -1,5 +1,6 @@
+import { coordinate } from './App.class';
 export class Goal {
-  public position: { x: number; y: number };
+  public position: coordinate;
   public goal_icon: string;
   constructor(x: number, y: number) {
     this.position = {
@@ -8,7 +9,7 @@ export class Goal {
     };
     this.goal_icon = '<img class="wanderer" src="assets/icons/baseline-local_bar-24px.svg"/>';
   }
-  getPosition() {
+  getPosition(): coordinate {
     return this.position;
   }
 }
