@@ -5,6 +5,7 @@ import { Goal } from './Goal.class';
 export interface coordinate {
   x: number;
   y: number;
+  distance?: number;
 }
 
 export class App {

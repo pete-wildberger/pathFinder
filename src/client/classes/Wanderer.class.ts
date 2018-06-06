@@ -25,8 +25,8 @@ export class Wanderer {
     return false;
   };
   distance_to_goal(pos: coordinate[], goal: coordinate): coordinate[] {
-    let output: any = [...pos];
-    let close_moves: coordinate[];
+    let output: coordinate[] = [...pos];
+    // let close_moves: coordinate[];
     console.log(output);
     output.forEach((coor: any) => {
       let x: number = goal.x - coor.x;
