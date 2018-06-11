@@ -1,4 +1,4 @@
-import { coordinate } from './App.class';
+import { coordinate } from "./App.class";
 
 export class Wanderer {
   public position: coordinate;
@@ -14,10 +14,16 @@ export class Wanderer {
       x: x - 1,
       y: y - 1
     };
-    this.wander_icon = '<img class="wanderer" src="assets/icons/baseline-directions_walk-24px.svg"/>';
+    this.wander_icon =
+      '<img class="wanderer" src="assets/icons/baseline-directions_walk-24px.svg"/>';
   }
   checkLimits = (move: any, board: any[]): boolean => {
-    if (move.x >= 0 && move.x <= this.limits.x && move.y >= 0 && move.y <= this.limits.y) {
+    if (
+      move.x >= 0 &&
+      move.x <= this.limits.x &&
+      move.y >= 0 &&
+      move.y <= this.limits.y
+    ) {
       if (board[move.y][move.x].blocked === false) {
         return true;
       }
@@ -33,14 +39,9 @@ export class Wanderer {
       let y: number = goal.y - coor.y;
       coor.distance = Math.abs(x + y);
     });
-    return output
-      .sort((a: any, b: any) => {
-        return a.distance - b.distance;
-      })
-      .map((item: any) => {
-        // delete item.distance;
-        return item;
-      });
+    return output.sort((a: any, b: any) => {
+      return a.distance - b.distance;
+    });
   }
   findNeighbors(pos: coordinate) {
     return {
@@ -62,7 +63,10 @@ export class Wanderer {
       }
     };
   }
-  make_decision = (board: any[], goal: coordinate): { x: number; y: number } => {
+  make_decision = (
+    board: any[],
+    goal: coordinate
+  ): { x: number; y: number } => {
     let moves = this.find_moves(board);
     const last_len = this.past_moves.length;
     if (last_len > 0) {
