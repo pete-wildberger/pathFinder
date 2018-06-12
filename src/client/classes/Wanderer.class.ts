@@ -1,4 +1,4 @@
-import { coordinate } from "./App.class";
+import { coordinate } from './App.class';
 
 export class Wanderer {
   public position: coordinate;
@@ -14,16 +14,10 @@ export class Wanderer {
       x: x - 1,
       y: y - 1
     };
-    this.wander_icon =
-      '<img class="wanderer" src="assets/icons/baseline-directions_walk-24px.svg"/>';
+    this.wander_icon = '<img class="wanderer" src="assets/icons/baseline-directions_walk-24px.svg"/>';
   }
   checkLimits = (move: any, board: any[]): boolean => {
-    if (
-      move.x >= 0 &&
-      move.x <= this.limits.x &&
-      move.y >= 0 &&
-      move.y <= this.limits.y
-    ) {
+    if (move.x >= 0 && move.x <= this.limits.x && move.y >= 0 && move.y <= this.limits.y) {
       if (board[move.y][move.x].blocked === false) {
         return true;
       }
@@ -63,25 +57,26 @@ export class Wanderer {
       }
     };
   }
-  make_decision = (
-    board: any[],
-    goal: coordinate
-  ): { x: number; y: number } => {
-    let moves = this.find_moves(board);
-    const last_len = this.past_moves.length;
+  make_decision = (board: any[], goal: coordinate): { x: number; y: number } => {
+    let last_len: number = this.past_moves.length;
+    let moves: coordinate[] = this.find_moves(board);
+    // add distance and sort by least distance
+    moves = this.distance_to_goal(moves, goal);
     if (last_len > 0) {
-      if (moves.length > 1) {
-        moves = this.distance_to_goal(moves, goal);
-        console.log(moves);
-        // moves = moves.filter(move => {
-        //   return move.x !== this.past_moves[last_len - 1].x || move.y !== this.past_moves[last_len - 1].y;
-        // });
+      let last_idx: number = moves.findIndex(move => {
+        return move.x === this.past_moves[last_len - 1].x && move.y === this.past_moves[last_len - 1].y;
+      });
+      // moving backwards is our last choice
+      if (last_idx > -1) {
+        moves.push(moves.splice(last_idx, 1)[0]);
       }
     }
-    let len: number = moves.length;
-    // randomly decide which way to go
-    let idx: number = this.getRandomInt(0, len - 1);
-    return moves[idx];
+    if (moves.length > 1 && moves[0].distance === moves[1].distance) {
+      let idx: number = this.getRandomInt(0, 2 - 1);
+      return moves[idx];
+    } else {
+      return moves[0];
+    }
   };
   find_moves = (board: any[]): coordinate[] => {
     let moves = [];
@@ -96,7 +91,6 @@ export class Wanderer {
   };
   move = (board: any[], goal: coordinate): void => {
     let next_move: coordinate = this.make_decision(board, goal);
-    console.log(this.position);
     this.past_moves.push(this.position);
     this.position = next_move;
   };
