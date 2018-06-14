@@ -1,4 +1,4 @@
-import { coordinate } from './App.class';
+import { coordinate } from "./App.class";
 
 export class Wanderer {
   public position: coordinate;
